@@ -24,8 +24,11 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	rng(rd())
 {
+	//std::uniform_int_distribution<int>vDist(-1, 1);
+	//ball.Init(395, 295, vDist(rng), vDist(rng));
 }
 
 void Game::Go()
@@ -38,8 +41,22 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (!SB.GameOver())
+	{
+		paddle.UpdateP1(wnd.kbd);
+		paddle.UpdateP2(wnd.kbd);
+		ball.Update(paddle);
+		ball.Goal();
+		SB.Update(ball);
+	}
 }
 
 void Game::ComposeFrame()
 {
+	border.Draw(gfx);
+	paddle.DrawPlayer1(gfx);
+	paddle.DrawPlayer2(gfx);
+	ball.Draw(gfx);
+	SB.DrawP1(gfx);
+	SB.DrawP2(gfx);
 }
