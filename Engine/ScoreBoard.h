@@ -9,6 +9,8 @@ public:
 	void DrawP2(Graphics& gfx);
 	void Update(Ball& ball);
 	bool GameOver();
+	bool Player1Wins();
+	bool Player2Wins();
 private:
 	int PX1 = 0;
 	int PY1 = 10;
@@ -21,4 +23,6 @@ private:
 	static constexpr Color P1 = Colors::Blue;
 	static constexpr Color P2 = Colors::Green;
 	bool gameOver = false;
+	bool player1Wins = false;
+	bool player2Wins = false;
 };

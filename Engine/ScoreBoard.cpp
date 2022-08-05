@@ -18,6 +18,7 @@ void ScoreBoard::Update(Ball& ball)
 		if (heightP1 >= Graphics::ScreenHeight - 20)
 		{
 			gameOver = true;
+			player1Wins = true;
 		}
 	}
 	if (ball.IsGoalP2())
@@ -26,6 +27,7 @@ void ScoreBoard::Update(Ball& ball)
 		if (heightP2 >= Graphics::ScreenHeight - 20)
 		{
 			gameOver = true;
+			player2Wins = true;
 		}
 	}
 }
@@ -33,4 +35,14 @@ void ScoreBoard::Update(Ball& ball)
 bool ScoreBoard::GameOver()
 {
 	return gameOver;
+}
+
+bool ScoreBoard::Player1Wins()
+{
+	return player1Wins;
+}
+
+bool ScoreBoard::Player2Wins()
+{
+	return player2Wins;
 }

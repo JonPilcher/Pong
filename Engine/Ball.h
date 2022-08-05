@@ -1,6 +1,7 @@
 #pragma once
 #include "Graphics.h"
 #include "Paddle.h"
+#include "SpriteCodex.h"
 
 class Ball
 {
@@ -17,8 +18,8 @@ private:
 	Paddle paddle;
 	int x = 395;
 	int y = 295;
-	int vx = 2;
-	int vy = -2;
+	int vx = 3;
+	int vy = -3;
 	int dim = 10;
 	int offset = 20;
 	static constexpr Color ball = Colors::Yellow;

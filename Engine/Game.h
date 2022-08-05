@@ -27,6 +27,7 @@
 #include "Paddle.h"
 #include "Ball.h"
 #include "ScoreBoard.h"
+#include "SpriteCodex.h"
 #include <random>
 
 class Game
@@ -53,5 +54,7 @@ private:
 	Paddle paddle;
 	Ball ball;
 	ScoreBoard SB;
+	SpriteCodex sprite;
+	bool isStarted = false;
 	/********************************/
 };

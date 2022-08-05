@@ -41,22 +41,49 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (!SB.GameOver())
+	if (isStarted)
 	{
-		paddle.UpdateP1(wnd.kbd);
-		paddle.UpdateP2(wnd.kbd);
-		ball.Update(paddle);
-		ball.Goal();
-		SB.Update(ball);
+		if (!SB.GameOver())
+		{
+			paddle.UpdateP1(wnd.kbd);
+			paddle.UpdateP2(wnd.kbd);
+			ball.Update(paddle);
+			ball.Goal();
+			SB.Update(ball);
+		}
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RETURN))
+	{
+		isStarted = true;
 	}
 }
 
 void Game::ComposeFrame()
 {
-	border.Draw(gfx);
-	paddle.DrawPlayer1(gfx);
-	paddle.DrawPlayer2(gfx);
-	ball.Draw(gfx);
-	SB.DrawP1(gfx);
-	SB.DrawP2(gfx);
+	if (!isStarted)
+	{
+		sprite.DrawTitlePong(190, 120, gfx);
+		sprite.DrawPressEnter(190, 300, gfx);
+	}
+	else
+	{
+		border.Draw(gfx);
+		paddle.DrawPlayer1(gfx);
+		paddle.DrawPlayer2(gfx);
+		SB.DrawP1(gfx);
+		SB.DrawP2(gfx);
+
+		if (!SB.GameOver())
+		{
+			ball.Draw(gfx);
+		}
+		if (SB.Player1Wins())
+		{
+			sprite.DrawPlayer1Wins(190, 210, gfx);
+		}
+		if (SB.Player2Wins())
+		{
+			sprite.DrawPlayer2Wins(190, 210, gfx);
+		}
+	}
 }

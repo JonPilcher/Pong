@@ -2,7 +2,7 @@
 
 void Ball::Draw(Graphics& gfx)
 {
-	gfx.DrawRectDim(x, y, dim, dim, ball);
+	SpriteCodex::DrawCircle(x, y, gfx);
 }
 
 void Ball::Goal()
@@ -89,7 +89,7 @@ bool Ball::TestCollisionPaddle1(const Paddle& paddle) const
 	const int ballBottom = y + dim;
 
 	return paddle1Right >= x &&
-		paddle.GetP1X() <= ballRight &&
+		paddle1Right <= ballRight &&
 		paddle1Bottom >= y &&
 		paddle.GetP1Y() <= ballBottom;
 }
@@ -101,7 +101,7 @@ bool Ball::TestCollisionPaddle2(const Paddle& paddle) const
 	const int ballRight = x + dim;
 	const int ballBottom = y + dim;
 
-	return paddle2Right >= x &&
+	return paddle.GetP2X() >= x &&
 		paddle.GetP2X() <= ballRight &&
 		paddle2Bottom >= y &&
 		paddle.GetP2Y() <= ballBottom;
