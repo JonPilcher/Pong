@@ -2,29 +2,31 @@
 
 void Ball::Draw(Graphics& gfx)
 {
-	SpriteCodex::DrawCircle(x, y, gfx);
+	//SpriteCodex::DrawCircle(x, y, gfx);
+	gfx.DrawCircle(int(x),int( y),int( dim / 2), ball);
 }
 
 void Ball::Goal()
 {
-	if (x < offset)
+	if ((x - dim/2) < offset)
 	{
-		x = offset;
+		
+		x = offset + dim/2;
 		isGoalP2 = true;
-		x = 395;
-		y = 295;
+		x = 400.0f;
+		y = 300.0f;
 		vx = +vx;
 	}
 	else
 	{
 		isGoalP2 = false;
 	}
-	if (x > (Graphics::ScreenWidth - offset) - dim)
+	if ((x- dim/2) > int(Graphics::ScreenWidth - offset))
 	{
-		x = (Graphics::ScreenWidth - offset) - dim;
+		x = int(Graphics::ScreenWidth - offset) - dim/2;
 		isGoalP1 = true;
-		x = 395;
-		y = 295;
+		x = 400.0f;
+		y = 300.0f;
 		vx = +vx;
 	}
 	else
@@ -35,30 +37,30 @@ void Ball::Goal()
 
 void Ball::Update(const Paddle& paddle)
 {
-	const int right = x + dim;
-	const int bottom = y + dim;
+	const float right = x + dim /2;
+	const float bottom = y + dim/2;
 
 	x += vx;
 	y += vy;
 	
 	if (TestCollisionPaddle1(paddle))
 	{
-		x = paddle.GetP1X() + paddle.GetWidth();
+		x = paddle.GetP1X() + paddle.GetWidth()+dim/2;
 		vx = -vx;
 	}
 	else if (TestCollisionPaddle2(paddle) )
 	{
-		x = paddle.GetP2X() - dim;
+		x = paddle.GetP2X()-dim/2 ;
 		vx = -vx;
 	}
-	if (y < offset)
+	if (y < offset + dim/2)
 	{
-		y = offset;
+		y = offset + dim/2;
 		vy = -vy;
 	}
-	else if (bottom > Graphics::ScreenHeight - offset)
+	else if (bottom > int(Graphics::ScreenHeight - offset))
 	{
-		y = (Graphics::ScreenHeight - offset) - dim;
+		y = (int(Graphics::ScreenHeight) - offset - dim/2);
 		vy = -vy;
 	}
 }
@@ -73,7 +75,7 @@ bool Ball::IsGoalP2()
 	return isGoalP2;
 }
 
-void Ball::Init(int in_x, int in_y, int in_vx, int in_vy)
+void Ball::Init(float in_x, float in_y, float in_vx, float in_vy)
 {
 	x = in_x;
 	y = in_y;
@@ -83,26 +85,26 @@ void Ball::Init(int in_x, int in_y, int in_vx, int in_vy)
 
 bool Ball::TestCollisionPaddle1(const Paddle& paddle) const
 {
-	const int paddle1Right = paddle.GetP1X() + paddle.GetWidth();
-	const int paddle1Bottom = paddle.GetP1Y() + paddle.GetHeight();
-	const int ballRight = x + dim;
-	const int ballBottom = y + dim;
+	const float paddle1Right = paddle.GetP1X() + paddle.GetWidth();
+	const float paddle1Bottom = paddle.GetP1Y() + paddle.GetHeight();
+	const float ballRight = x + dim/2;
+	const float ballBottom = y + dim/2;
 
-	return paddle1Right >= x &&
+	return paddle1Right >= x - dim/2 &&
 		paddle1Right <= ballRight &&
-		paddle1Bottom >= y &&
+		paddle1Bottom >= y - dim/2 &&
 		paddle.GetP1Y() <= ballBottom;
 }
 
 bool Ball::TestCollisionPaddle2(const Paddle& paddle) const
 {
-	const int paddle2Right = paddle.GetP2X() + paddle.GetWidth();
-	const int paddle2Bottom = paddle.GetP2Y() + paddle.GetHeight();
-	const int ballRight = x + dim;
-	const int ballBottom = y + dim;
+	const float paddle2Right = (paddle.GetP2X() ) + paddle.GetWidth();
+	const float paddle2Bottom = (paddle.GetP2Y() ) + paddle.GetHeight();
+	const float ballRight = x + dim/2;
+	const float ballBottom = y + dim/2;
 
-	return paddle.GetP2X() >= x &&
+	return paddle.GetP2X() >= x - dim/2 &&
 		paddle.GetP2X() <= ballRight &&
-		paddle2Bottom >= y &&
+		paddle2Bottom >= y - dim/2 &&
 		paddle.GetP2Y() <= ballBottom;
 }

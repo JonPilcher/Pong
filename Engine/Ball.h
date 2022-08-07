@@ -11,17 +11,17 @@ public:
 	void Update(const Paddle& paddle );
 	bool IsGoalP1();
 	bool IsGoalP2();
-	void Init(int in_x, int in_y, int in_vx, int in_vy);
+	void Init(float in_x, float in_y, float in_vx, float in_vy);
 	bool TestCollisionPaddle1(const Paddle& paddle)const;
 	bool TestCollisionPaddle2(const Paddle& paddle)const;
 private:
 	Paddle paddle;
-	int x = 395;
-	int y = 295;
-	int vx = 3;
-	int vy = -3;
-	int dim = 10;
-	int offset = 20;
+	float x = 395.0f;
+	float y = 295.0f;
+	float vx = -1.0f;
+	float vy = -1.0f;
+	float dim = 10.0f;
+	float offset = 20.0f;
 	static constexpr Color ball = Colors::Yellow;
 	bool isGoalP1 = false;
 	bool isGoalP2;
