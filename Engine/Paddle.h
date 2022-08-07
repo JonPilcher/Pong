@@ -7,8 +7,8 @@ class Paddle
 public:
 	void DrawPlayer1(Graphics& gfx);
 	void DrawPlayer2(Graphics& gfx);
-	void UpdateP1(Keyboard& kbd);
-	void UpdateP2(Keyboard& kbd);
+	void UpdateP1(Keyboard& kbd, float dt);
+	void UpdateP2(Keyboard& kbd, float dt);
 	float GetP1X()const;
 	float GetP1Y()const;
 	float GetP2X()const;
@@ -22,7 +22,7 @@ private:
 	float y2 = 280.0f;
 	float width = 10.0f;
 	float height = 40.0f;
-	float speed = 4.0f;
+	float speed = 4.0f * 60.0f;
 	float offset = 20.0f;
 	static constexpr Color player1 = Colors::Blue;
 	static constexpr Color player2 = Colors::Green;

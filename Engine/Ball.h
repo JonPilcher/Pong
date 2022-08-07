@@ -9,7 +9,7 @@ class Ball
 public:
 	void Draw(Graphics& gfx);
 	void Goal();
-	void Update(const Paddle& paddle, float vDist_in);
+	void Update(const Paddle& paddle, float vDist_in,float dt);
 	bool IsGoalP1();
 	bool IsGoalP2();
 	void Init(float in_x, float in_y, float in_vx, float in_vy);
@@ -28,5 +28,5 @@ private:
 	float offset = 20.0f;
 	static constexpr Color ball = Colors::Yellow;
 	bool isGoalP1 = false;
-	bool isGoalP2;
+	bool isGoalP2 = false;
 };

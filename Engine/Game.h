@@ -29,6 +29,7 @@
 #include "ScoreBoard.h"
 #include "SpriteCodex.h"
 #include <random>
+#include "FrameTimer.h"
 
 class Game
 {
@@ -51,6 +52,7 @@ private:
 	std::random_device rd;
 	std::mt19937 rng;
 	std::uniform_real_distribution<float>vDist;
+	FrameTimer ft;
 	Border border;
 	Paddle paddle;
 	Ball ball;

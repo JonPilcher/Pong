@@ -34,13 +34,13 @@ void Ball::Goal()
 	}
 }
 
-void Ball::Update(const Paddle& paddle, float vDist_in)
+void Ball::Update(const Paddle& paddle, float vDist_in, float dt)
 {
 	const float bottom = y + dim/2;
 
 	
-	x += vx;
-	y += vy;
+	x += vx * dt;
+	y += vy * dt;
 	
 	if (TestCollisionPaddle1(paddle))
 	{

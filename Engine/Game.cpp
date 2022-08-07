@@ -26,13 +26,13 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	rng(rd()),
-	vDist(-2.0f,2.0f)
+	vDist(-2.0f * 60.0f,2.0f * 60.0f)
 {
 
 	//std::uniform_int_distribution<int>kickOff(1, 2);
 	//std::uniform_real_distribution<float>vDist(-2.0f, 2.0f);
 
-	ball.Init(400, 300, -3.0f, vDist(rng));
+	ball.Init(400, 300, -3.0f * 60.0f, vDist(rng));
 }
 
 void Game::Go()
@@ -45,13 +45,14 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float dt = ft.Mark();
 	if (isStarted)
 	{
 		if (!SB.GameOver())
 		{
-			paddle.UpdateP1(wnd.kbd);
-			paddle.UpdateP2(wnd.kbd);
-			ball.Update(paddle,vDist(rng));
+			paddle.UpdateP1(wnd.kbd,dt);
+			paddle.UpdateP2(wnd.kbd,dt);
+			ball.Update(paddle,vDist(rng),dt);
 			ball.Goal();
 			SB.Update(ball);
 		}
