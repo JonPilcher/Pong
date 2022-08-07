@@ -2,12 +2,12 @@
 
 void Paddle::DrawPlayer1(Graphics& gfx)
 {
-	gfx.DrawRectDim(x1, y1, width, height, player1);
+	gfx.DrawRectDim(int(x1),int( y1),int( width),int( height), player1);
 }
 
 void Paddle::DrawPlayer2(Graphics& gfx)
 {
-	gfx.DrawRectDim(x2, y2, width, height, player2);
+	gfx.DrawRectDim(int(x2), int(y2), int(width), int(height), player2);
 }
 
 void Paddle::UpdateP1(Keyboard& kbd)
@@ -25,15 +25,14 @@ void Paddle::UpdateP1(Keyboard& kbd)
 	{
 		y1 = offset;
 	}
-	if (y1 >= (Graphics::ScreenHeight- offset)-height)
+	if (y1 >= int(Graphics::ScreenHeight- offset)-height)
 	{
-		y1 = (Graphics::ScreenHeight - offset) - height;
+		y1 = int(Graphics::ScreenHeight - offset) - height;
 	}
 }
 
 void Paddle::UpdateP2(Keyboard& kbd)
 {
-	int offset = 20;
 	if (kbd.KeyIsPressed(VK_UP))
 	{
 		y2 = y2 - speed;
@@ -47,38 +46,38 @@ void Paddle::UpdateP2(Keyboard& kbd)
 	{
 		y2 = offset;
 	}
-	if (y2 >= (Graphics::ScreenHeight - offset) - height)
+	if (y2 >= int(Graphics::ScreenHeight - offset) - height)
 	{
-		y2 = (Graphics::ScreenHeight - offset) - height;
+		y2 = int(Graphics::ScreenHeight - offset) - height;
 	}
 }
 
-int Paddle::GetP1X()const
+float Paddle::GetP1X()const
 {
 	return x1;
 }
 
-int Paddle::GetP1Y()const
+float Paddle::GetP1Y()const
 {
 	return y1;
 }
 
-int Paddle::GetP2X()const
+float Paddle::GetP2X()const
 {
 	return x2;
 }
 
-int Paddle::GetP2Y()const
+float Paddle::GetP2Y()const
 {
 	return y2;
 }
 
-int Paddle::GetWidth()const
+float Paddle::GetWidth()const
 {
 	return width;
 }
 
-int Paddle::GetHeight()const
+float Paddle::GetHeight()const
 {
 	return height;
 }
