@@ -50,6 +50,7 @@ private:
 	/*  User Variables              */
 	std::random_device rd;
 	std::mt19937 rng;
+	std::uniform_real_distribution<float>vDist;
 	Border border;
 	Paddle paddle;
 	Ball ball;

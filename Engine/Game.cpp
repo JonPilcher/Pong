@@ -25,10 +25,14 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	rng(rd())
+	rng(rd()),
+	vDist(-2.0f,2.0f)
 {
-	//std::uniform_int_distribution<int>vDist(-1, 1);
-	//ball.Init(395, 295, vDist(rng), vDist(rng));
+
+	//std::uniform_int_distribution<int>kickOff(1, 2);
+	//std::uniform_real_distribution<float>vDist(-2.0f, 2.0f);
+
+	ball.Init(400, 300, -3.0f, vDist(rng));
 }
 
 void Game::Go()
@@ -47,7 +51,7 @@ void Game::UpdateModel()
 		{
 			paddle.UpdateP1(wnd.kbd);
 			paddle.UpdateP2(wnd.kbd);
-			ball.Update(paddle);
+			ball.Update(paddle,vDist(rng));
 			ball.Goal();
 			SB.Update(ball);
 		}

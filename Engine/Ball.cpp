@@ -2,7 +2,6 @@
 
 void Ball::Draw(Graphics& gfx)
 {
-	//SpriteCodex::DrawCircle(x, y, gfx);
 	gfx.DrawCircle(int(x),int( y),int( dim / 2), ball);
 }
 
@@ -35,11 +34,11 @@ void Ball::Goal()
 	}
 }
 
-void Ball::Update(const Paddle& paddle)
+void Ball::Update(const Paddle& paddle, float vDist_in)
 {
-	const float right = x + dim /2;
 	const float bottom = y + dim/2;
 
+	
 	x += vx;
 	y += vy;
 	
@@ -47,11 +46,13 @@ void Ball::Update(const Paddle& paddle)
 	{
 		x = paddle.GetP1X() + paddle.GetWidth()+dim/2;
 		vx = -vx;
+		vy = vDist_in;
 	}
 	else if (TestCollisionPaddle2(paddle) )
 	{
 		x = paddle.GetP2X()-dim/2 ;
 		vx = -vx;
+		vy = vDist_in;
 	}
 	if (y < offset + dim/2)
 	{
