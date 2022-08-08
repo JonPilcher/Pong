@@ -16,8 +16,8 @@ public:
 	void Init(const Vec2& pos_in,const Vec2 vel_in);
 	bool TestCollisionPaddle1(const Paddle& paddle)const;
 	bool TestCollisionPaddle2(const Paddle& paddle)const;
+	bool IsBallColliding();
 private:
-
 	std::random_device rd;
 	std::mt19937 rng;
 	Paddle paddle;
@@ -28,4 +28,5 @@ private:
 	static constexpr Color ball = Colors::Yellow;
 	bool isGoalP1 = false;
 	bool isGoalP2 = false;
+	bool isBallColliding = false;
 };

@@ -23,11 +23,11 @@ void Paddle::UpdateP1(Keyboard& kbd, float dt)
 
 	if (posP1.y <= offset)
 	{
-		posP1.y = offset * dt;
+		posP1.y = offset;
 	}
 	if (posP1.y >= int(Graphics::ScreenHeight- offset)-height)
 	{
-		posP1.y = int(Graphics::ScreenHeight - offset) - height * dt;
+		posP1.y = int(Graphics::ScreenHeight - offset) - height ;
 	}
 }
 
@@ -44,11 +44,11 @@ void Paddle::UpdateP2(Keyboard& kbd, float dt)
 
 	if (posP2.y <= offset)
 	{
-		posP2.y = offset * dt;
+		posP2.y = offset ;
 	}
 	if (posP2.y >= int(Graphics::ScreenHeight - offset) - height)
 	{
-		posP2.y = int(Graphics::ScreenHeight - offset) - height * dt;
+		posP2.y = int(Graphics::ScreenHeight - offset) - height ;
 	}
 }
 

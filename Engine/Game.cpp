@@ -33,6 +33,7 @@ Game::Game( MainWindow& wnd )
 	//std::uniform_real_distribution<float>vDist(-2.0f, 2.0f);
 
 	ball.Init(Vec2 (395.0f,295.0f),Vec2( -3.0f * 60.0f, vDist(rng)));
+	title.Play();
 }
 
 void Game::Go()
@@ -52,10 +53,20 @@ void Game::UpdateModel()
 		{
 			paddle.UpdateP1(wnd.kbd,dt);
 			paddle.UpdateP2(wnd.kbd,dt);
-			ball.Update(paddle,vDist(rng),dt);
+			ball.Update(paddle,vDist(rng),dt);			
 			ball.Goal();
 			SB.Update(ball);
+			if (ball.IsBallColliding())
+			{
+				ballHit.Play();
+			}
 		}
+		if(SB.playsound)
+		{			
+				Winner.Play();	
+				SB.playsound = false;
+		}
+		
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RETURN))
 	{

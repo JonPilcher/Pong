@@ -19,6 +19,7 @@ void ScoreBoard::Update(Ball& ball)
 		{
 			gameOver = true;
 			player1Wins = true;
+			playsound = true;
 		}
 	}
 	if (ball.IsGoalP2())
@@ -28,6 +29,7 @@ void ScoreBoard::Update(Ball& ball)
 		{
 			gameOver = true;
 			player2Wins = true;
+			playsound = true;
 		}
 	}
 }
@@ -46,3 +48,4 @@ bool ScoreBoard::Player2Wins()
 {
 	return player2Wins;
 }
+

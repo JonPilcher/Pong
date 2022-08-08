@@ -30,6 +30,7 @@
 #include "SpriteCodex.h"
 #include <random>
 #include "FrameTimer.h"
+#include "SoundEffect.h"
 
 class Game
 {
@@ -59,5 +60,8 @@ private:
 	ScoreBoard SB;
 	SpriteCodex sprite;
 	bool isStarted = false;
+	Sound ballHit = Sound({ L"Sounds\\ballHit.wav" });
+	Sound title = Sound({ L"Sounds\\title.wav" });
+	Sound Winner = Sound({ L"sounds\\gameover.wav" });
 	/********************************/
 };

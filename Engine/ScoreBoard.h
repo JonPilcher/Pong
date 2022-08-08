@@ -10,7 +10,8 @@ public:
 	void Update(Ball& ball);
 	bool GameOver();
 	bool Player1Wins();
-	bool Player2Wins();
+	bool Player2Wins();	
+	bool playsound = false;
 private:
 	int PX1 = 0;
 	int PY1 = 10;
@@ -25,4 +26,5 @@ private:
 	bool gameOver = false;
 	bool player1Wins = false;
 	bool player2Wins = false;
+	
 };

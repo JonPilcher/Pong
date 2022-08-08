@@ -47,22 +47,30 @@ void Ball::Update(const Paddle& paddle, float vDist_in, float dt)
 		pos.x = paddle.GetPosP1().x + paddle.GetWidth()+dim/2;
 		vel.x = -vel.x;
 		vel.y = vDist_in;
+		isBallColliding = true;
 	}
 	else if (TestCollisionPaddle2(paddle) )
 	{
 		pos.x = paddle.GetPosP2().x -dim/2 ;
 		vel.x = -vel.x;
 		vel.y = vDist_in;
-	}
-	if (pos.y < offset + dim/2)
+		isBallColliding = true;
+	}	
+	else if (pos.y < offset + dim/2)
 	{
 		pos.y = offset + dim/2;
 		vel.y = -vel.y;
+		isBallColliding = true;
 	}
 	else if (bottom > int(Graphics::ScreenHeight - offset))
 	{
 		pos.y = (int(Graphics::ScreenHeight) - offset - dim/2);
 		vel.y = -vel.y;
+		isBallColliding = true;
+	}
+	else
+	{
+		isBallColliding = false;
 	}
 }
 
@@ -106,4 +114,9 @@ bool Ball::TestCollisionPaddle2(const Paddle& paddle) const
 		paddle.GetPosP2().x <= ballRight &&
 		paddle2Bottom >= pos.y - dim/2 &&
 		paddle.GetPosP2().y <= ballBottom;
+}
+
+bool Ball::IsBallColliding()
+{
+	return isBallColliding;
 }
