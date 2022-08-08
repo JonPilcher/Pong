@@ -2,31 +2,31 @@
 
 void Ball::Draw(Graphics& gfx)
 {
-	gfx.DrawCircle(int(x),int( y),int( dim / 2), ball);
+	gfx.DrawCircle(int(pos.x),int( pos.y),int( dim / 2), ball);
 }
 
 void Ball::Goal()
 {
-	if ((x - dim/2) < offset)
+	if ((pos.x - dim/2) < offset)
 	{
 		
-		x = offset + dim/2;
+		pos.x = offset + dim/2;
 		isGoalP2 = true;
-		x = 400.0f;
-		y = 300.0f;
-		vx = +vx;
+		pos.x = 400.0f;
+		pos.y = 300.0f;
+		vel.x = +vel.x;
 	}
 	else
 	{
 		isGoalP2 = false;
 	}
-	if ((x- dim/2) > int(Graphics::ScreenWidth - offset))
+	if ((pos.x- dim/2) > int(Graphics::ScreenWidth - offset))
 	{
-		x = int(Graphics::ScreenWidth - offset) - dim/2;
+		pos.x = int(Graphics::ScreenWidth - offset) - dim/2;
 		isGoalP1 = true;
-		x = 400.0f;
-		y = 300.0f;
-		vx = +vx;
+		pos.x = 400.0f;
+		pos.y = 300.0f;
+		vel.x = +vel.x;
 	}
 	else
 	{
@@ -36,33 +36,33 @@ void Ball::Goal()
 
 void Ball::Update(const Paddle& paddle, float vDist_in, float dt)
 {
-	const float bottom = y + dim/2;
+	const float bottom = pos.y + dim/2;
 
 	
-	x += vx * dt;
-	y += vy * dt;
+	pos.x += vel.x * dt;
+	pos.y += vel.y * dt;
 	
 	if (TestCollisionPaddle1(paddle))
 	{
-		x = paddle.GetP1X() + paddle.GetWidth()+dim/2;
-		vx = -vx;
-		vy = vDist_in;
+		pos.x = paddle.GetPosP1().x + paddle.GetWidth()+dim/2;
+		vel.x = -vel.x;
+		vel.y = vDist_in;
 	}
 	else if (TestCollisionPaddle2(paddle) )
 	{
-		x = paddle.GetP2X()-dim/2 ;
-		vx = -vx;
-		vy = vDist_in;
+		pos.x = paddle.GetPosP2().x -dim/2 ;
+		vel.x = -vel.x;
+		vel.y = vDist_in;
 	}
-	if (y < offset + dim/2)
+	if (pos.y < offset + dim/2)
 	{
-		y = offset + dim/2;
-		vy = -vy;
+		pos.y = offset + dim/2;
+		vel.y = -vel.y;
 	}
 	else if (bottom > int(Graphics::ScreenHeight - offset))
 	{
-		y = (int(Graphics::ScreenHeight) - offset - dim/2);
-		vy = -vy;
+		pos.y = (int(Graphics::ScreenHeight) - offset - dim/2);
+		vel.y = -vel.y;
 	}
 }
 
@@ -76,36 +76,34 @@ bool Ball::IsGoalP2()
 	return isGoalP2;
 }
 
-void Ball::Init(float in_x, float in_y, float in_vx, float in_vy)
+void Ball::Init(const Vec2& pos_in, const Vec2 vel_in)
 {
-	x = in_x;
-	y = in_y;
-	vx = in_vx;
-	vy = in_vy;
+	pos = pos_in;
+	vel = vel_in;
 }
 
 bool Ball::TestCollisionPaddle1(const Paddle& paddle) const
 {
-	const float paddle1Right = paddle.GetP1X() + paddle.GetWidth();
-	const float paddle1Bottom = paddle.GetP1Y() + paddle.GetHeight();
-	const float ballRight = x + dim/2;
-	const float ballBottom = y + dim/2;
+	const float paddle1Right = paddle.GetPosP1().x + paddle.GetWidth();
+	const float paddle1Bottom = paddle.GetPosP1().y + paddle.GetHeight();
+	const float ballRight = pos.x + dim/2;
+	const float ballBottom = pos.y + dim/2;
 
-	return paddle1Right >= x - dim/2 &&
+	return paddle1Right >= pos.x - dim/2 &&
 		paddle1Right <= ballRight &&
-		paddle1Bottom >= y - dim/2 &&
-		paddle.GetP1Y() <= ballBottom;
+		paddle1Bottom >= pos.y - dim/2 &&
+		paddle.GetPosP1().y <= ballBottom;
 }
 
 bool Ball::TestCollisionPaddle2(const Paddle& paddle) const
 {
-	const float paddle2Right = (paddle.GetP2X() ) + paddle.GetWidth();
-	const float paddle2Bottom = (paddle.GetP2Y() ) + paddle.GetHeight();
-	const float ballRight = x + dim/2;
-	const float ballBottom = y + dim/2;
+	const float paddle2Right = (paddle.GetPosP2().x ) + paddle.GetWidth();
+	const float paddle2Bottom = (paddle.GetPosP2().y ) + paddle.GetHeight();
+	const float ballRight = pos.x + dim/2;
+	const float ballBottom = pos.y + dim/2;
 
-	return paddle.GetP2X() >= x - dim/2 &&
-		paddle.GetP2X() <= ballRight &&
-		paddle2Bottom >= y - dim/2 &&
-		paddle.GetP2Y() <= ballBottom;
+	return paddle.GetPosP2().x >= pos.x - dim/2 &&
+		paddle.GetPosP2().x <= ballRight &&
+		paddle2Bottom >= pos.y - dim/2 &&
+		paddle.GetPosP2().y <= ballBottom;
 }

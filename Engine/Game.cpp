@@ -32,7 +32,7 @@ Game::Game( MainWindow& wnd )
 	//std::uniform_int_distribution<int>kickOff(1, 2);
 	//std::uniform_real_distribution<float>vDist(-2.0f, 2.0f);
 
-	ball.Init(400, 300, -3.0f * 60.0f, vDist(rng));
+	ball.Init(Vec2 (395.0f,295.0f),Vec2( -3.0f * 60.0f, vDist(rng)));
 }
 
 void Game::Go()

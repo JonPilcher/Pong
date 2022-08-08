@@ -2,32 +2,32 @@
 
 void Paddle::DrawPlayer1(Graphics& gfx)
 {
-	gfx.DrawRectDim(int(x1),int( y1),int( width),int( height), player1);
+	gfx.DrawRectDim(int(posP1.x),int(posP1.y),int( width),int( height), player1);
 }
 
 void Paddle::DrawPlayer2(Graphics& gfx)
 {
-	gfx.DrawRectDim(int(x2), int(y2), int(width), int(height), player2);
+	gfx.DrawRectDim(int(posP2.x), int(posP2.y), int(width), int(height), player2);
 }
 
 void Paddle::UpdateP1(Keyboard& kbd, float dt)
 {
 	if (kbd.KeyIsPressed('W'))
 	{
-		y1 = y1 - speed * dt;
+		posP1.y -= speed * dt;
 	}
 	if (kbd.KeyIsPressed('S'))
 	{
-		y1 = y1 + speed * dt;
+		posP1.y += speed * dt;
 	}
 
-	if (y1 <= offset)
+	if (posP1.y <= offset)
 	{
-		y1 = offset * dt;
+		posP1.y = offset * dt;
 	}
-	if (y1 >= int(Graphics::ScreenHeight- offset)-height)
+	if (posP1.y >= int(Graphics::ScreenHeight- offset)-height)
 	{
-		y1 = int(Graphics::ScreenHeight - offset) - height * dt;
+		posP1.y = int(Graphics::ScreenHeight - offset) - height * dt;
 	}
 }
 
@@ -35,42 +35,34 @@ void Paddle::UpdateP2(Keyboard& kbd, float dt)
 {
 	if (kbd.KeyIsPressed(VK_UP))
 	{
-		y2 = y2 - speed * dt;
+		posP2.y -= speed * dt;
 	}
 	if (kbd.KeyIsPressed(VK_DOWN))
 	{
-		y2 = y2 + speed * dt;
+		posP2.y += speed * dt;
 	}
 
-	if (y2 <= offset)
+	if (posP2.y <= offset)
 	{
-		y2 = offset * dt;
+		posP2.y = offset * dt;
 	}
-	if (y2 >= int(Graphics::ScreenHeight - offset) - height)
+	if (posP2.y >= int(Graphics::ScreenHeight - offset) - height)
 	{
-		y2 = int(Graphics::ScreenHeight - offset) - height * dt;
+		posP2.y = int(Graphics::ScreenHeight - offset) - height * dt;
 	}
 }
 
-float Paddle::GetP1X()const
+Vec2 Paddle::GetPosP1() const
 {
-	return x1;
+	return posP1;
 }
 
-float Paddle::GetP1Y()const
+Vec2 Paddle::GetPosP2() const
 {
-	return y1;
+	return posP2;
 }
 
-float Paddle::GetP2X()const
-{
-	return x2;
-}
 
-float Paddle::GetP2Y()const
-{
-	return y2;
-}
 
 float Paddle::GetWidth()const
 {
